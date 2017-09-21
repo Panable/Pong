@@ -12,6 +12,7 @@ import com.alkira.main.Pong;
 public class Keyboard implements KeyListener {
 
 	private boolean w, s, up, down;
+	private boolean c, m;
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -20,6 +21,8 @@ public class Keyboard implements KeyListener {
 		if (key == KeyEvent.VK_S) s = true;
 		if (key == KeyEvent.VK_UP) up = true;
 		if (key == KeyEvent.VK_DOWN) down = true;
+		if (key == KeyEvent.VK_C) c = true;
+		if (key == KeyEvent.VK_M) m = true;
 		
 		if (key == KeyEvent.VK_X) {
 			Pong.score1 = 0;
@@ -37,6 +40,8 @@ public class Keyboard implements KeyListener {
 		if (key == KeyEvent.VK_S) s = false;
 		if (key == KeyEvent.VK_UP) up = false;
 		if (key == KeyEvent.VK_DOWN) down = false;
+		if (key == KeyEvent.VK_C) c = false;
+		if (key == KeyEvent.VK_M) m = false;
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -57,6 +62,14 @@ public class Keyboard implements KeyListener {
 
 	public boolean isDown() {
 		return down;
+	}
+
+	public boolean isC() {
+		return c;
+	}
+
+	public boolean isM() {
+		return m;
 	}
 
 }

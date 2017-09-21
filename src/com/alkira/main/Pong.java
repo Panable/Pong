@@ -72,7 +72,7 @@ public class Pong extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void run() {
 		requestFocus();
 
@@ -113,11 +113,6 @@ public class Pong extends Canvas implements Runnable {
 		paddle1.update();
 		paddle2.update();
 		ball.update();
-
-		if (ball.isDestroyed()) {
-			ball = null;
-			ball = new Ball(30, 50, 2, paddle1, paddle2);
-		}
 	}
 
 	public static int score1 = 0, score2 = 0;
