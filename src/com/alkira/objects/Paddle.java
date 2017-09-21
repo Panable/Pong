@@ -67,5 +67,9 @@ public class Paddle {
 	public void setSpeed(int m_speed) {
 		this.m_speed = m_speed;
 	}
+	
+	public int getX() {
+		return m_x;
+	}
 
 }

@@ -13,6 +13,9 @@ import com.alkira.main.Pong;
 
 public class Ball {
 
+	public static double updates = 60.0;
+	public final double update_multiplier = 1.25;
+
 	boolean destroyed = false;
 
 	private int width = 8, height = 8;
@@ -31,7 +34,7 @@ public class Ball {
 		m_paddle2 = paddle2;
 		m_speed = speed;
 		velX = speed;
-		velY = -speed;
+		velY = -speed / 2;
 		random = new Random();
 	}
 
@@ -52,32 +55,36 @@ public class Ball {
 
 	public void checkCollision() {
 		if (getBounds().intersects(m_paddle1.getBounds())) {
-			//if (velX < -speed * 4 || velX > speed * 4)
-				velX *= -(random.nextInt(2) + 1);
+			velX *= -1;
+			updates = (random.nextInt(2) == 0) ? updates * update_multiplier : updates;
+
 		}
 		if (getBounds().intersects(m_paddle2.getBounds())) {
-			//if (velX < -4 || velX > 4)
-				velX *= -(random.nextInt(2) + 1);
+			velX *= -1;
+			updates = (random.nextInt(2) == 0) ? updates * update_multiplier : updates;
 		}
+
 		if (m_y < 0)
 			velY *= -1;
 		if (m_y > Pong.HEIGHT - height)
 			velY *= -1;
 
-		if (m_x < 0) {
+		if (m_x < m_paddle1.getX() + 16) {
 			Pong.score2++;
 
 			m_x = startX;
 			m_y = startY;
 			velX = m_speed;
 			velY = m_speed;
+			updates = 60.0;
 		}
-		if (m_x > Pong.WIDTH - width) {
+		if (m_x > m_paddle2.getX()) {
 			Pong.score1++;
 			m_x = startX;
 			m_y = startY;
 			velX = m_speed;
 			velY = m_speed;
+			updates = 60.0;
 		}
 
 	}

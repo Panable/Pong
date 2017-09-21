@@ -80,8 +80,12 @@ public class Pong extends Canvas implements Runnable {
 		double ns = 1000000000.0 / updates;
 		double delta = 0;
 
+		double ball_ns = 1000000000.0;
+		double ball_delta = 0;
+		
 		int frames = 0;
 
+		long ball_lastTime = System.nanoTime();
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 
@@ -93,7 +97,16 @@ public class Pong extends Canvas implements Runnable {
 				update();
 				delta = 0;
 			}
+			
+			long ball_currentTime = System.nanoTime();
+			ball_delta += (ball_currentTime - ball_lastTime) / (ball_ns / Ball.updates);
+			ball_lastTime = ball_currentTime;
 
+			if (ball_delta >= 1) {
+				ball.update();
+				ball_delta = 0;
+			}
+			
 			render();
 			frames++;
 
@@ -112,7 +125,6 @@ public class Pong extends Canvas implements Runnable {
 	private void update() {
 		paddle1.update();
 		paddle2.update();
-		ball.update();
 	}
 
 	public static int score1 = 0, score2 = 0;
